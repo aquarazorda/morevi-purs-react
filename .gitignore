@@ -10,4 +10,4 @@ node_modules
 output
 dist
 serve
-./index.js
+index.js
