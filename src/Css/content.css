@@ -1,0 +1,33 @@
+.align-center {
+  align-items: center;
+}
+
+.float-right {
+  float: right;
+}
+
+.content {
+  padding: 2vh;
+}
+
+.item {
+  padding: 1vh 0vh;
+}
+
+.title {
+  font-size: 2.3vh;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 152px;
+  top: 50%;
+}

@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "build": "spago build",
+    "bundle": "spago bundle-app --watch --to ./public/main.js",
+    "serve": "parcel ./public/index.html --no-hmr --public-url / & open http://localhost:1234"
+  },
+  "dependencies": {
+    "antd": "^4.19.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}

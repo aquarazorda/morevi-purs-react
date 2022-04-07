@@ -1,0 +1,8 @@
+.flex {
+  display: flex;
+}
+
+.header {
+  padding: 0 2vh;
+  border-bottom: 1px solid #f0f0f0;
+}
