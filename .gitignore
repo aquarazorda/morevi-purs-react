@@ -9,4 +9,5 @@ node_modules
 .parcel-cache
 output
 dist
-
+serve
+./index.js

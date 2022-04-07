@@ -21,6 +21,9 @@ type Artists = Array
 
 data Response = Release
   { artists :: Artists
+  , title :: String
+  , year :: Int
+  , country :: String
   }
 
 apiUrl :: String

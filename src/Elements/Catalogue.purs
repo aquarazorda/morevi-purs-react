@@ -2,8 +2,9 @@ module Elements.Catalogue where
 
 import Prelude
 
-import Data.Array (foldl)
-import Data.Maybe (Maybe(..))
+import Data.Array (foldl, head)
+import Data.Maybe (Maybe(..), fromMaybe)
+import Data.String (Pattern(..), split)
 import Data.Traversable (sequence)
 import Effect.Aff (Aff)
 import Elements.Antd.Elements (Children, antdCard, antdCol, antdImage, antdRow)
@@ -26,8 +27,11 @@ releasesReq = do
   rs <- sequence $ map (\{ id } -> get ("/releases/" <> id) Release Nothing) releases
   pure $ sequence rs
 
+nameStripExtra :: String -> String
+nameStripExtra = fromMaybe "" <<< head <<< split (Pattern "(")
+
 getArtistName :: Artists -> String
-getArtistName = foldl (\acc { name } -> acc <> name) ""
+getArtistName = foldl (\acc { name } -> acc <> nameStripExtra name) ""
 
 drawReleases :: Maybe (Array Response) -> Children
 drawReleases mbRs = case mbRs of
@@ -44,14 +48,14 @@ releaseImage =
     ]
 
 releaseContent :: Response -> JSX
-releaseContent (Release { artists }) = antdCol { xs: 18, xl: 21 }
+releaseContent (Release { artists, title }) = antdCol { xs: 18, xl: 21 }
   [ antdRow { className: "title" }
       [ antdCol { span: 12 }
           [ R.div_
               [ R.span
-                  { className: " bold"
+                  { className: "bold"
                   , children:
-                      [ R.text $ getArtistName artists
+                      [ R.text $ getArtistName artists <> " - " <> title
                       ]
                   }
               ]
