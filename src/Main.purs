@@ -5,10 +5,9 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
-import Elements.Antd.Elements (element)
-import Elements.Catalogue (mkCatalogue)
-import Elements.Header (mkHeader)
 import Internal.Router (route, router, routes)
+import Pages.Home (mkHome)
+import Pages.Rules (mkRules)
 import React.Basic.DOM as R
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
@@ -21,15 +20,12 @@ main = do
   case moreviApp of
     Nothing -> log "Could not find app"
     Just app -> do
-      header <- mkHeader
-      catalogue <- mkCatalogue
+      home <- mkHome
+      rules <- mkRules
       R.render
         ( router $ routes
-            [ route "/"
-                $ R.div_
-                    [ header {}
-                    , catalogue {}
-                    ]
+            [ route "/" $ home {}
+            , route "/rules" $ rules {}
             ]
         )
         app

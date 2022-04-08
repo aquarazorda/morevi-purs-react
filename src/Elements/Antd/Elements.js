@@ -4,6 +4,7 @@ const createElement = React.createElement;
 const { Row, Col, Button, Image, Menu, Card, Spin } = require('antd');
 const { default: Search } = require('antd/lib/input/Search');
 const { LoadingOutlined } = require('@ant-design/icons');
+const { Link } = require('react-router-dom');
 
 const createProps = (ps) => {
   if (ps && ps.props) {
@@ -32,6 +33,7 @@ exports._antdMenu = Menu;
 exports._antdMenuItem = Menu.Item;
 exports._antdSearch = Search;
 exports._antdCard = Card;
+exports._link = Link;
 
 exports.antdLoader = element(Spin)({ indicator: element(LoadingOutlined)({ fontSize: 24 }) });
 exports.element = element;
