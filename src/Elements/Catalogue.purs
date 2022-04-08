@@ -7,8 +7,8 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String (Pattern(..), split)
 import Data.Traversable (sequence)
 import Effect.Aff (Aff)
-import Elements.Antd.Elements (Children, antdCard, antdCol, antdImage, antdRow)
-import Internal.Requests (Artists, Response(..), get)
+import Elements.Antd.Elements (Children, antdCard, antdCol, antdImage, antdLoader, antdRow)
+import Internal.Requests (Artists, Response(..), Label, get)
 import React.Basic.DOM as R
 import React.Basic.Hooks (Component, JSX)
 import React.Basic.Hooks as React
@@ -27,11 +27,20 @@ releasesReq = do
   rs <- sequence $ map (\{ id } -> get ("/releases/" <> id) Release Nothing) releases
   pure $ sequence rs
 
-nameStripExtra :: String -> String
-nameStripExtra = fromMaybe "" <<< head <<< split (Pattern "(")
+stripExtra :: String -> String
+stripExtra = fromMaybe "" <<< head <<< split (Pattern "(")
 
 getArtistName :: Artists -> String
-getArtistName = foldl (\acc { name } -> acc <> nameStripExtra name) ""
+getArtistName = foldl (\acc { name } -> acc <> stripExtra name) ""
+
+getLabel :: Label -> String
+getLabel l =
+  let
+    label = head l
+  in
+    case label of
+      Just { name } -> stripExtra name
+      Nothing -> "Not on label"
 
 drawReleases :: Maybe (Array Response) -> Children
 drawReleases mbRs = case mbRs of
@@ -48,7 +57,7 @@ releaseImage =
     ]
 
 releaseContent :: Response -> JSX
-releaseContent (Release { artists, title }) = antdCol { xs: 18, xl: 21 }
+releaseContent (Release { artists, title, labels, year }) = antdCol { xs: 18, xl: 21 }
   [ antdRow { className: "title" }
       [ antdCol { span: 12 }
           [ R.div_
@@ -56,6 +65,11 @@ releaseContent (Release { artists, title }) = antdCol { xs: 18, xl: 21 }
                   { className: "bold"
                   , children:
                       [ R.text $ getArtistName artists <> " - " <> title
+                      ]
+                  }
+              , R.span
+                  { children:
+                      [ R.text $ " / " <> getLabel labels <> " / " <> show year
                       ]
                   }
               ]
@@ -85,5 +99,5 @@ mkCatalogue = do
       releasesReq
     pure $ wrapper case res of
       Just d -> drawReleases d
-      Nothing -> [ R.text "Loading..." ]
+      Nothing -> [ R.div { className: "loader", children: [ R.text "Loading... ", antdLoader ] } ]
 

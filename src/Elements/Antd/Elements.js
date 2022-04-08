@@ -1,8 +1,9 @@
 const React = require('react');
 const createElement = React.createElement;
 
-const { Row, Col, Button, Image, Menu, Card } = require('antd');
+const { Row, Col, Button, Image, Menu, Card, Spin } = require('antd');
 const { default: Search } = require('antd/lib/input/Search');
+const { LoadingOutlined } = require('@ant-design/icons');
 
 const createProps = (ps) => {
   if (ps && ps.props) {
@@ -14,7 +15,7 @@ const createProps = (ps) => {
   }
 }
 
-exports.element = (component) => (ps) => {
+const element = (component) => (ps) => {
   const props = createProps(ps);
 
   return Array.isArray(props.children)
@@ -31,3 +32,6 @@ exports._antdMenu = Menu;
 exports._antdMenuItem = Menu.Item;
 exports._antdSearch = Search;
 exports._antdCard = Card;
+
+exports.antdLoader = element(Spin)({ indicator: element(LoadingOutlined)({ fontSize: 24 }) });
+exports.element = element;

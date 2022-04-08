@@ -19,11 +19,16 @@ type Artists = Array
   { name :: String
   }
 
+type Label = Array
+  { name :: String
+  }
+
 data Response = Release
   { artists :: Artists
   , title :: String
   , year :: Int
   , country :: String
+  , labels :: Label
   }
 
 apiUrl :: String

@@ -7,7 +7,7 @@ import React.Basic.DOM (text)
 type AntdComponentType = forall props. ReactComponent props
 type Children = Array JSX
 
-foreign import element :: forall props. ReactComponent { | props } -> { | props } -> JSX
+foreign import element :: forall props. ReactComponent (Record props) -> Record props -> JSX
 
 foreign import _antdRow :: AntdComponentType
 foreign import _antdCol :: AntdComponentType
@@ -17,6 +17,7 @@ foreign import _antdMenu :: AntdComponentType
 foreign import _antdMenuItem :: AntdComponentType
 foreign import _antdSearch :: AntdComponentType
 foreign import _antdCard :: AntdComponentType
+foreign import antdLoader :: JSX
 
 type CommonProps =
   ( key :: String

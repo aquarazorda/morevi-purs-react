@@ -2,12 +2,14 @@
   "scripts": {
     "build": "spago build",
     "bundle": "spago bundle-app --watch --to ./public/main.js",
-    "serve": "parcel ./public/index.html --no-hmr --public-url / & open http://localhost:1234"
+    "serve": "parcel serve --no-source-maps --dist-dir serve public/index.html"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "antd": "^4.19.5",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "process": "^0.11.10"

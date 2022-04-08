@@ -5,8 +5,10 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
+import Elements.Antd.Elements (element)
 import Elements.Catalogue (mkCatalogue)
 import Elements.Header (mkHeader)
+import Internal.Router (route, router, routes)
 import React.Basic.DOM as R
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
@@ -22,9 +24,12 @@ main = do
       header <- mkHeader
       catalogue <- mkCatalogue
       R.render
-        ( R.div_
-            [ header {}
-            , catalogue {}
+        ( router $ routes
+            [ route "/"
+                $ R.div_
+                    [ header {}
+                    , catalogue {}
+                    ]
             ]
         )
         app

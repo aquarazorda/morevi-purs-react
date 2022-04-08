@@ -11,3 +11,5 @@ output
 dist
 serve
 index.js
+yarn.lock
+./public/*.js
