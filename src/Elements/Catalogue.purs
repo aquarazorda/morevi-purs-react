@@ -7,7 +7,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String (Pattern(..), split)
 import Data.Traversable (sequence)
 import Effect.Aff (Aff)
-import Elements.Antd.Elements (Children, antdCard, antdCol, antdImage, antdLoader, antdRow)
+import Elements.Antd (Children, antdCard, antdCol, antdImage, antdLoader, antdRow)
 import Internal.Requests (Artists, Response(..), Label, get)
 import React.Basic.DOM as R
 import React.Basic.Hooks (Component, JSX)

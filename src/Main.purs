@@ -5,7 +5,9 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
+import Elements.Header (header)
 import Internal.Router (route, router, routes)
+import Pages.Account (mkAccount)
 import Pages.Home (mkHome)
 import Pages.Rules (mkRules)
 import React.Basic.DOM as R
@@ -22,10 +24,15 @@ main = do
     Just app -> do
       home <- mkHome
       rules <- mkRules
+      account <- mkAccount
       R.render
-        ( router $ routes
-            [ route "/" $ home {}
-            , route "/rules" $ rules {}
+        ( router
+            [ header
+            , routes
+                [ route "/" $ home {}
+                , route "/rules" $ rules {}
+                , route "/account" $ account {}
+                ]
             ]
         )
         app
