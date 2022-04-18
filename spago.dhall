@@ -19,6 +19,7 @@ to generate this file without the comments in this block.
   , "either"
   , "foldable-traversable"
   , "foreign"
+  , "functions"
   , "maybe"
   , "milkis"
   , "prelude"
@@ -26,6 +27,7 @@ to generate this file without the comments in this block.
   , "react-basic-dom"
   , "react-basic-hooks"
   , "strings"
+  , "tuples"
   , "web-dom"
   , "web-html"
   ]

@@ -16,7 +16,6 @@ header = antdRow { className: "header align-center" }
       { span: 14 }
       [ antdMenu { mode: "horizontal" }
           [ antdMenuItem "კალათა" "/cart"
-          , antdMenuItem "კატალოგი" "/catalogue"
           , antdMenuItem "წესები" "/rules"
           , antdMenuItem "ჩემი ანგარიში" "/account"
           ]
