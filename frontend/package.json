@@ -2,7 +2,7 @@
   "scripts": {
     "build": "spago build",
     "bundle": "spago bundle-app --watch --to ./public/main.js",
-    "serve": "parcel serve --no-source-maps --dist-dir serve public/index.html"
+    "serve": "parcel serve --no-source-maps --dist-dir serve ./public/index.html"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",

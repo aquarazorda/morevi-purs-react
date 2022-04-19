@@ -3,3 +3,5 @@ let upstream =
         sha256:75d0f0719f32456e6bdc3efd41cfc64785655d2b751e3d080bd849033ed053f2
 
 in  upstream
+  with frontend = ./frontend/spago.dhall as Location
+  with backend  = ./backend/spago.dhall  as Location

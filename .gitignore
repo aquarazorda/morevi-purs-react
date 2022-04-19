@@ -1,15 +1,4 @@
-# Dependencies
-.psci_modules
-.spago
-bower_components
-node_modules
-
-# Generated files
-.psci
+.psc-ide-port
 .parcel-cache
-output
-dist
-serve
-index.js
 yarn.lock
-./public/*.js
+.DS_Store

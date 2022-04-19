@@ -8,11 +8,19 @@ import Data.String (Pattern(..), split)
 import Data.Traversable (sequence)
 import Effect.Aff (Aff)
 import Elements.Antd (Children, antdCard, antdCol, antdImage, antdLoader, antdRow)
-import Internal.Requests (Artists, Response(..), Label, get)
+import Internal.Requests (Artists, Label, Request(..), get)
 import React.Basic.DOM as R
 import React.Basic.Hooks (Component, JSX)
 import React.Basic.Hooks as React
 import React.Basic.Hooks.Aff (useAff)
+
+data Response = Release
+  { artists :: Artists
+  , title :: String
+  , year :: Int
+  , country :: String
+  , labels :: Label
+  }
 
 releases ∷ Array { condition ∷ String, id ∷ String, price ∷ String }
 releases =
@@ -24,7 +32,7 @@ releases =
 
 releasesReq ∷ Aff (Maybe (Array Response))
 releasesReq = do
-  rs <- sequence $ map (\{ id } -> get ("/releases/" <> id) Release Nothing) releases
+  rs <- sequence $ map (\{ id } -> get (Discogs $ "/releases/" <> id) Release) releases
   pure $ sequence rs
 
 stripExtra :: String -> String

@@ -10,7 +10,7 @@ When creating a new Spago project, you can use
 `spago init --no-comments` or `spago init -C`
 to generate this file without the comments in this block.
 -}
-{ name = "my-project"
+{ name = "morevi-frontend"
 , dependencies =
   [ "aff"
   , "arrays"
@@ -31,6 +31,6 @@ to generate this file without the comments in this block.
   , "web-dom"
   , "web-html"
   ]
-, packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs" ]
+, packages = ../packages.dhall
+, sources = [ "src/**/*.purs", "../common/**/*.purs" ]
 }
