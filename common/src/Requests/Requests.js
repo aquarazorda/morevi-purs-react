@@ -1,1 +1,1 @@
-exports.decodeResponse = constructor => constructor
+exports.decodeResponse = a => a

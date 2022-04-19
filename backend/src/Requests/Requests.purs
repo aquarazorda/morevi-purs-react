@@ -10,5 +10,5 @@ import Milkis.Impl.Node (nodeFetch)
 fetch :: M.Fetch
 fetch = M.fetch nodeFetch
 
-get :: forall a res. URL -> (a -> res) -> Aff (Maybe res)
+get :: forall res. URL -> Aff (Maybe res)
 get = makeRequest fetch getMethod

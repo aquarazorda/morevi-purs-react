@@ -12,6 +12,7 @@
   , "node-process"
   , "prelude"
   , "psci-support"
+  , "simple-json"
   ]
 , packages = ../packages.dhall
 , sources = [ "src/**/*.purs", "../common/**/*.purs" ]
