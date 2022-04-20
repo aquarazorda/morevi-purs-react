@@ -22,6 +22,7 @@ makeRequest fetch method req = do
     attempt
       $ fetch req
           { method: method
+          , headers: M.makeHeaders { "Access-Control-Allow-Origin": "http://localhost:8080" }
           }
   case _res of
     Left _ -> pure Nothing

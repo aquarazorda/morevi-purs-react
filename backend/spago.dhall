@@ -13,6 +13,7 @@
   , "prelude"
   , "psci-support"
   , "simple-json"
+  , "tuples"
   ]
 , packages = ../packages.dhall
 , sources = [ "src/**/*.purs", "../common/**/*.purs" ]
