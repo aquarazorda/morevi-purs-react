@@ -5,22 +5,15 @@ import Prelude
 import Common.Requests (withToken)
 import Common.Types.Discogs (FolderResponse, ReleaseResponse)
 import Data.Maybe (Maybe(..))
-import Dotenv (loadFile) as Dotenv
 import Effect.Aff (Aff)
-import Effect.Class (liftEffect)
 import Milkis (URL(..))
-import Node.Process (lookupEnv)
 import Requests (get)
+import Internal.Env (fromEnv)
 
 data Response = Folders FolderResponse
 
 apiPath :: String
 apiPath = "https://api.discogs.com"
-
-fromEnv :: String -> Aff (Maybe String)
-fromEnv key = do
-  _ <- Dotenv.loadFile
-  liftEffect $ lookupEnv key
 
 getUsername :: Aff String
 getUsername = do

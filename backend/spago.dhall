@@ -1,6 +1,7 @@
 { name = "morevi-backend"
 , dependencies =
   [ "aff"
+  , "arrays"
   , "console"
   , "dotenv"
   , "effect"
@@ -9,6 +10,7 @@
   , "httpure"
   , "maybe"
   , "milkis"
+  , "mysql"
   , "node-process"
   , "prelude"
   , "psci-support"
