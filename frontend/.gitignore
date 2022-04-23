@@ -4,3 +4,4 @@ output
 /node_modules
 .psc-ide-port
 yarn.lock
+/serve

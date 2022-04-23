@@ -1,12 +1,9 @@
 { name = "morevi-backend"
 , dependencies =
   [ "aff"
-  , "arrays"
   , "console"
   , "dotenv"
   , "effect"
-  , "either"
-  , "foreign"
   , "httpure"
   , "maybe"
   , "milkis"
@@ -16,7 +13,8 @@
   , "psci-support"
   , "simple-json"
   , "tuples"
+  , "morevi-common"
   ]
 , packages = ../packages.dhall
-, sources = [ "src/**/*.purs", "../common/**/*.purs" ]
+, sources = [ "src/**/*.purs" ]
 }

@@ -1,8 +1,6 @@
-{ name = "my-project"
+{ name = "morevi-common"
 , dependencies =
   [ "aff"
-  , "console"
-  , "effect"
   , "either"
   , "foreign"
   , "maybe"

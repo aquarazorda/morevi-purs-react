@@ -4,12 +4,8 @@ import Prelude
 
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
-import Database (createPool')
-import Effect.Aff (Aff)
 import HTTPure (ResponseM, headers, notFound', ok')
 import HTTPure.Headers (Headers)
-import MySQL.Connection (query_)
-import MySQL.Pool (withPool)
 import Requests.Discogs (getFolder, getFolders)
 import Simple.JSON (writeJSON)
 
@@ -33,8 +29,3 @@ folderController id = do
   case folder of
     Nothing -> notFound' withHeaders
     Just f -> ok' withHeaders (writeJSON f)
-
-dbTestController :: Aff (Array { id :: Int, title :: String })
-dbTestController = do
-  pool <- createPool'
-  flip withPool pool $ query_ "SELECT * FROM releases"
