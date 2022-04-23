@@ -4,6 +4,7 @@ import Prelude
 
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
+import Database.Releases (getReleases)
 import HTTPure (ResponseM, headers, notFound', ok')
 import HTTPure.Headers (Headers)
 import Requests.Discogs (getFolder, getFolders)
@@ -29,3 +30,8 @@ folderController id = do
   case folder of
     Nothing -> notFound' withHeaders
     Just f -> ok' withHeaders (writeJSON f)
+
+releasesController :: ResponseM
+releasesController = do
+  rel <- getReleases
+  ok' withHeaders (writeJSON rel)
