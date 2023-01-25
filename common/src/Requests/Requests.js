@@ -1,1 +1,1 @@
-exports.decodeResponse = a => a
+export const decodeResponse = a => a;

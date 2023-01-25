@@ -9,6 +9,7 @@
   , "functions"
   , "maybe"
   , "milkis"
+  , "nullable"
   , "prelude"
   , "react-basic"
   , "react-basic-dom"

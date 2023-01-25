@@ -1,7 +1,7 @@
-const React = require('react');
+import React from 'react';
+import { Form, Input } from 'antd';
 
-const { Form, Input } = require('antd');
 
-exports._form = Form;
-exports._formItem = Form.Item;
-exports._input = Input;
+export const _form = Form;
+export const _formItem = Form.Item;
+export const _input = Input;

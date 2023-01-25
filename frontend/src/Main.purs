@@ -15,6 +15,7 @@ import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (toNonElementParentNode)
 import Web.HTML.Window (document)
+import Effect.Console (logShow)
 
 main :: Effect Unit
 main = do

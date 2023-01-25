@@ -1,15 +1,15 @@
-const React = require('react');
-const createElement = React.createElement;
+import React from "react";
+import { Row, Col, Button, Image, Menu, Card, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import Search from 'antd/lib/input/Search';
+import Title from 'antd/lib/typography/Title';
 
-const { Row, Col, Button, Image, Menu, Card, Spin } = require('antd');
-const { default: Search } = require('antd/lib/input/Search');
-const { LoadingOutlined } = require('@ant-design/icons');
-const { Link } = require('react-router-dom');
-const { default: Title } = require('antd/lib/typography/Title');
+const createElement = React.createElement;
 
 const createProps = (ps) => {
   if (ps && ps.props) {
-    props = Object.assign(ps, ps.props);
+    let props = Object.assign(ps, ps.props);
     delete props.props;
     return props;
   } else {
@@ -17,7 +17,7 @@ const createProps = (ps) => {
   }
 }
 
-const element = (component) => (ps) => {
+export const element = (component) => (ps) => {
   const props = createProps(ps);
 
   return Array.isArray(props.children)
@@ -25,17 +25,14 @@ const element = (component) => (ps) => {
     : createElement(component, props);
 }
 
-
-exports._antdRow = Row;
-exports._antdCol = Col;
-exports._antdButton = Button;
-exports._antdImage = Image;
-exports._antdMenu = Menu;
-exports._antdMenuItem = Menu.Item;
-exports._antdSearch = Search;
-exports._antdCard = Card;
-exports._link = Link;
-exports._title = Title;
-
-exports.antdLoader = element(Spin)({ indicator: element(LoadingOutlined)({ fontSize: 24 }) });
-exports.element = element;
+export const _antdRow = Row;
+export const _antdCol = Col;
+export const _antdButton = Button;
+export const _antdImage = Image;
+export const _antdMenu = Menu;
+export const _antdMenuItem = Menu.Item;
+export const _antdSearch = Search["default"];
+export const _antdCard = Card;
+export const _link = Link;
+export const _title = Title["default"];
+export const antdLoader = element(Spin)({ indicator: element(LoadingOutlined)({ fontSize: 24 }) });

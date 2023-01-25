@@ -1,5 +1,6 @@
-const { BrowserRouter, Routes, Route } = require("react-router-dom");
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-exports._router = BrowserRouter;
-exports._routes = Routes;
-exports._route = Route;
+
+export const _router = BrowserRouter;
+export const _routes = Routes;
+export const _route = Route;

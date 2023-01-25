@@ -82,7 +82,7 @@ mkCatalogue ∷ Component {}
 mkCatalogue = do
   React.component "Catalogue" \_ -> React.do
     res <- useAff unit do
-      getReleasesFromFolder "2007531"
+      getReleasesFromFolder "5262352"
     pure $ wrapper case res of
       Just r -> drawReleases r
       Nothing -> [ R.div { className: "loader", children: [ R.text "Loading... ", antdLoader ] } ]
