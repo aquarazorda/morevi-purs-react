@@ -5,9 +5,10 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Data.Tuple (Tuple(..))
 import Database.Releases (getReleases)
+import Effect.Class.Console (logShow)
 import HTTPure (ResponseM, headers, notFound', ok')
 import HTTPure.Headers (Headers)
-import Requests.Discogs (getFolder, getFolders)
+import Requests.Discogs (getFolder, getFolders, getRelease)
 import Simple.JSON (writeJSON)
 
 withHeaders :: Headers
@@ -35,3 +36,9 @@ releasesController :: ResponseM
 releasesController = do
   rel <- getReleases
   ok' withHeaders (writeJSON rel)
+
+releaseController :: String -> ResponseM
+releaseController id = do
+  release <- getRelease id
+  logShow release
+  ok' withHeaders (writeJSON release)

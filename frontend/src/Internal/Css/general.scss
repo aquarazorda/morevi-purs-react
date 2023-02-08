@@ -1,0 +1,32 @@
+body {
+  margin: 15px 5%;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.header {
+  padding: 0 2vh;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.gap {
+  &-14 {
+    gap: 14px;
+  }
+}
+
+.mt {
+  &-15 {
+    margin-top: 15px;
+  }
+}

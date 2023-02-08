@@ -1,12 +1,11 @@
 { name = "morevi-frontend"
 , dependencies =
   [ "aff"
-  , "arrays"
   , "console"
   , "effect"
   , "either"
   , "foreign"
-  , "functions"
+  , "literals"
   , "maybe"
   , "milkis"
   , "nullable"
@@ -14,11 +13,10 @@
   , "react-basic"
   , "react-basic-dom"
   , "react-basic-hooks"
-  , "strings"
-  , "tuples"
+  , "unsafe-coerce"
   , "web-dom"
   , "web-html"
   ]
 , packages = ../packages.dhall
-, sources = [ "src/**/*.purs", "../common/**/*.purs" ]
+, sources = [ "src/Internal/**/*.purs", "../common/**/*.purs" ]
 }

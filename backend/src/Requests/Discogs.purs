@@ -3,12 +3,12 @@ module Requests.Discogs where
 import Prelude
 
 import Common.Requests (withToken)
-import Common.Types.Discogs (FolderResponse, ReleaseResponse)
+import Common.Types.Discogs (FolderResponse, ReleaseResponse, Release)
 import Data.Maybe (Maybe(..))
 import Effect.Aff (Aff)
+import Internal.Env (fromEnv)
 import Milkis (URL(..))
 import Requests (get)
-import Internal.Env (fromEnv)
 
 data Response = Folders FolderResponse
 
@@ -40,3 +40,7 @@ getFolder id = do
   username <- getUsername
   path <- withToken getToken $ apiPath <> "/users/" <> username <> "/collection/folders/" <> id <> "/releases"
   get (URL path)
+
+getRelease :: String -> Aff (Maybe Release)
+getRelease id = do
+  get (URL $ apiPath <> "/releases/" <> id)

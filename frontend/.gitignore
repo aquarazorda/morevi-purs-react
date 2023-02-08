@@ -1,7 +1,9 @@
 .spago
 output
-/*.js
 /node_modules
 .psc-ide-port
 yarn.lock
 /serve
+/dist
+/todo
+index.js
