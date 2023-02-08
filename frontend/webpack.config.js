@@ -26,7 +26,7 @@ module.exports = {
   },
 
   entry: {
-    main: './src/Internal/index.js'
+    main: './src/index.js'
   },
 
   output: {

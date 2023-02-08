@@ -18,5 +18,12 @@
   , "web-html"
   ]
 , packages = ../packages.dhall
-, sources = [ "src/Internal/**/*.purs", "../common/**/*.purs" ]
+, sources = [ 
+  "src/Elements/**/*.purs"
+, "src/Extra/**/*.purs"
+, "src/Internal/**/*.purs"
+, "src/Pages/**/*.purs"
+, "src/Utils/**/*.purs"
+, "src/Main.purs"
+, "../common/**/*.purs" ]
 }
