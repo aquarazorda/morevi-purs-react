@@ -1,10 +1,13 @@
 {
   "scripts": {
+    "serve": "./watch.sh",
+    "webpack-serve": "webpack-dev-server --progress --hot",
     "build": "spago build",
+    "build-watch": "spago build -w",
     "build-external": "spago build -p './src/External/**/*.purs'",
-    "bundle": "spago bundle-app --watch --to ./index.js",
-    "serve": "spago build -w & webpack-dev-server --progress --hot",
-    "webpack-build": "spago build -w & webpack build"
+    "build-external-watch": "spago build -p './src/External/**/*.purs' -w",
+    "bundle-external": "spago build -p './src/External/**/*.purs' --then 'webpack build'",
+    "bundle": "spago build --then 'yarn bundle-external'"
   },
   "dependencies": {
     "react": "^18.2.0",
