@@ -4,10 +4,9 @@ import Prelude
 
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
-import Effect.Class (liftEffect)
 import Effect.Class.Console (log)
 import Internal.Router (routing)
-import Morevi.Internal.Elements.Header (mkHeader)
+import Morevi.Elements.Header (mkHeader)
 import React.Basic (fragment)
 import React.Basic.DOM as R
 import Web.DOM.NonElementParentNode (getElementById)

@@ -40,7 +40,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        include: glob.sync(path.resolve(__dirname) + "/output/Morevi.External.*"),
+        include: [
+          glob.sync(path.resolve(__dirname) + "/output/Morevi.External.*"), 
+          path.resolve(__dirname, 'src', 'Extra', '*.js')
+        ],
         use: [{
           loader: 'babel-loader'
         }]
@@ -55,18 +58,7 @@ module.exports = {
             },
           },
         ],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
-      },
+      }
     ]
   },
 
@@ -75,6 +67,7 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       External: glob.sync(path.resolve(__dirname, 'output')),
+      Extra: path.resolve(__dirname, 'src', 'Extra'),
     },
   },
 

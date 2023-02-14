@@ -1,42 +1,40 @@
-module Morevi.Internal.Elements.Header where
+module Morevi.Elements.Header where
 
 import Prelude
 
+import Morevi.Styled as S
 import React.Basic.DOM as R
 import React.Basic.Hooks (Component, JSX, component)
 
-logo :: JSX
-logo = R.img
+logo :: {} -> JSX
+logo _ = R.img
   { style: R.css { width: "20%" }
   , src: "/logo.png"
   , alt: "Logo"
   }
 
 icon :: String -> JSX
-icon name = R.img
-  { src: "/icons/" <> name <> ".svg"
-  , style: R.css { width: "23px", height: "23px" }
-  } 
+icon name = S.button { variant: "pale" }
+  [ R.img
+      { src: "/icons/" <> name <> ".svg"
+      , style: R.css { width: "23px", height: "23px" }
+      }
+  ]
 
-userBar :: JSX
-userBar = R.div
-  { className: "flex ml-auto gap-14 align-center"
-  , children:
-      [ icon "search" 
-      , R.button { children: [ R.text "Categories" ] }
-      , R.button { children: [ R.text "Sort By" ] }
-      , R.button { children: [ R.text "Sign In" ] }
-      , icon "cart"
-      ]
+userBar :: {} -> JSX
+userBar _ = S.flex
+  { gap: 14
+  , align: "center"
+  , ml: "auto"
   }
+  [ icon "search"
+  , S.button_ [ R.text "Categories" ]
+  , S.button { variant: "pale" } [ R.text "Sort By" ]
+  , S.button_ [ R.text "Sign In" ]
+  , icon "cart"
+  ]
 
 mkHeader :: Component {}
 mkHeader = do
   component "Header" \_ -> React.do
-    pure $ R.div
-      { className: "flex"
-      , children:
-          [ logo
-          , userBar
-          ]
-      }
+    pure $ S.flex { mb: "36px" } [ logo {}, userBar {} ]

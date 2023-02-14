@@ -1,4 +1,4 @@
-module Elements.Footer where
+module Morevi.Elements.Footer where
 
 import Prelude
 
