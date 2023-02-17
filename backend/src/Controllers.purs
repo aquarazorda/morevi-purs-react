@@ -1,44 +1,34 @@
-module Controllers where
+module Morevi.Backend.Controllers where
 
 import Prelude
-
-import Data.Maybe (Maybe(..))
-import Data.Tuple (Tuple(..))
-import Database.Releases (getReleases)
-import Effect.Class.Console (logShow)
-import HTTPure (ResponseM, headers, notFound', ok')
-import HTTPure.Headers (Headers)
-import Requests.Discogs (getFolder, getFolders, getRelease)
-import Simple.JSON (writeJSON)
-
-withHeaders :: Headers
-withHeaders = headers
-  [ Tuple "Access-Control-Allow-Origin" "*"
-  , Tuple "Access-Control-Allow-Methods" "GET, POST, OPTIONS"
-  , Tuple "Access-Control-Allow-Headers" "Access-Control-Allow-Origin, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
-  ]
+import Data.Either (Either(..))
+import Database.Mongo as Mongo
+import HTTPure (ResponseM)
+import Morevi.Backend.Handlers.Folders (findFolder, saveFolder)
+import Morevi.Backend.Requests (ResponseMessage, send)
+import Morevi.Backend.Requests.Discogs (Folder, getFolder, getFolders)
 
 foldersController :: ResponseM
-foldersController = do
+foldersController = send =<< getFolders
+
+folderController ∷ String -> ResponseM
+folderController = send <=< getFolder
+
+importFolderController :: Mongo.Database -> String -> ResponseM
+importFolderController db id = do
   folders <- getFolders
-  case folders of
-    Just fs -> ok' withHeaders (writeJSON fs)
-    Nothing -> ok' withHeaders "No folders found"
+  case findFolder id folders of
+    Right folder -> send =<< saveFolder db folder.data
+    Left err -> send (Left err :: ResponseMessage Folder)
 
-folderController :: String → ResponseM
-folderController id = do
-  folder <- getFolder id
-  case folder of
-    Nothing -> notFound' withHeaders
-    Just f -> ok' withHeaders (writeJSON f)
-
-releasesController :: ResponseM
-releasesController = do
-  rel <- getReleases
-  ok' withHeaders (writeJSON rel)
-
-releaseController :: String -> ResponseM
-releaseController id = do
-  release <- getRelease id
-  logShow release
-  ok' withHeaders (writeJSON release)
+-- importFolderController :: Mongo.Database -> String -> ResponseM
+-- importFolderController db id = send <=< saveFolder db id <=< getFolder id
+-- releasesController :: ResponseM
+-- releasesController = do
+--   rel <- getReleases
+--   ok' withHeaders (writeJSON rel)
+-- releaseController :: String -> ResponseM
+-- releaseController id = do
+--   release <- getRelease id
+--   logShow release
+--   ok' withHeaders (writeJSON release)

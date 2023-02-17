@@ -6,3 +6,8 @@ in  upstream
   with morevi-frontend = ./frontend/spago.dhall as Location
   with morevi-backend = ./backend/spago.dhall as Location
   with morevi-common = ./common/spago.dhall as Location
+  with mongo = {
+      dependencies = [ "effect", "aff", "simple-json", "node-process", "bifunctors", "either", "exceptions", "foreign", "functions", "maybe", "nullable", "prelude", "record", "typelevel-prelude", "unsafe-coerce" ]
+    , repo = "https://github.com/aquarazorda/purescript-mongo"
+    , version = "master"
+  }

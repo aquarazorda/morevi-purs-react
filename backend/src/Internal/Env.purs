@@ -1,4 +1,4 @@
-module Internal.Env where
+module Morevi.Backend.Internal.Env where
 
 import Prelude
 
