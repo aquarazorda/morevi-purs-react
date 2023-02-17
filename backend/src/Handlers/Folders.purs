@@ -25,21 +25,3 @@ findFolder id folders = do
 
 saveFolder :: Mongo.Database -> Folder -> Aff (ResponseMessage Foreign)
 saveFolder db = readAndTakeAction db collection Mongo.insertOne
-
--- readAndTakeAction db "folders" Mongo.insertOne f
--- saveFolderReleases
--- findFolder id folders = case folders of
---   Right f -> note (cInternal' "Error finding folder match") $ find (\f' -> f'.id == id) f
---   Left e -> Left e
--- saveFolder :: Mongo.Database -> String -> ResponseMessage ReleasesResponse -> ResponseMessage Folders -> Aff (ResponseMessage Foreign)
--- saveFolder db id = do
---   folders <- getFolders
---   case note (cInternal' "Error finding folder match") (find (\f -> f.id == id)) =<< folders of
---     Just f -> readAndTakeAction f $ actionWithCollection' "folders" Mongo.insertOne db
---     Nothing -> pure $ cInternal "Error fetching folder"
--- Just f -> readAndTakeAction f $ actionWithCollection' "folders" Mongo.insertOne db
--- Nothing -> pure $ cInternal "Error fetching folder"
--- importFolder :: Mongo.Database -> ResponseMessage ReleasesResponse -> Aff (Maybe Mongo.InsertManyResult)
--- importFolder db fs = case fs of
---   Just f -> actionWithCollection db "releases" Mongo.insertMany f
---   Nothing -> pure Nothing

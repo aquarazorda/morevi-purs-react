@@ -2,9 +2,11 @@ module Morevi.Backend.Internal.Mongo where
 
 import Prelude
 import Data.Either (Either(..))
+import Data.Maybe (Maybe(..))
 import Database.Mongo as M
 import Effect.Aff (Aff)
 import Foreign (Foreign)
+import Morevi.Backend.Internal.Env (fromEnv)
 import Morevi.Backend.Requests (ResponseMessage, cInternal, cSuccess)
 import Simple.JSON (class WriteForeign, undefined, write)
 
@@ -28,10 +30,20 @@ instance mongoError :: DBResponse MongoResponse Foreign where
     GENERIC_ERROR -> cInternal "Something went wrong"
     GENERIC_SUCCESS -> cSuccess undefined
 
+createDbPath :: Aff (Maybe String)
+createDbPath = do
+  n <- fromEnv "DB_NAME"
+  u <- fromEnv "DB_URL"
+  usr <- fromEnv "DB_USER"
+  pass <- fromEnv "DB_PASS"
+  case n, u, usr, pass of
+    Just n', Just u', Just usr', Just pass' -> pure $ Just $ "mongodb://" <> usr' <> ":" <> pass' <> "@" <> u' <> "/" <> n'
+    _, _, _, _ -> pure Nothing
+
 type DBAction res
   = Foreign -> M.InsertOptions -> M.Collection Foreign -> Aff res
 
-readAndTakeAction ∷
+readAndTakeAction ::
   forall a res dbRes.
   WriteForeign a =>
   DBResponse MongoResponse res =>

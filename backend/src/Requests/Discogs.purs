@@ -8,6 +8,7 @@ import Morevi.Backend.Internal.Env (fromEnv)
 import Morevi.Backend.Requests (ResponseMessage, get)
 import Morevi.Common.Requests (withToken)
 import Morevi.Common.Types.Releases (Label, Artist)
+import Types (AppState)
 
 type Note
   = { field_id :: Int
@@ -57,6 +58,13 @@ type ReleasesResponse
 apiPath :: String
 apiPath = "https://api.discogs.com"
 
+createDiscogsPath ∷ Aff (Maybe String)
+createDiscogsPath = do
+  username <- fromEnv "DISCOGS_USERNAME"
+  pure $ gen <$> username
+  where
+  gen u = apiPath <> "/users/" <> u <> "/collection/folders/"
+
 getUsername :: Aff String
 getUsername = do
   mToken <- fromEnv "DISCOGS_USERNAME"
@@ -71,18 +79,17 @@ getToken = do
     Just token -> pure token
     Nothing -> pure ""
 
-getFolders ∷ Aff (ResponseMessage Folders)
-getFolders = do
-  username <- getUsername
-  path <- withToken getToken $ apiPath <> "/users/" <> username <> "/collection/folders"
+getFolders ∷ AppState -> Aff (ResponseMessage Folders)
+getFolders { token, foldersPath } = do
   res <- get (URL path) :: Aff (ResponseMessage FolderResponse)
   pure $ (\d -> d { data = d.data.folders }) <$> res
+  where
+  path = withToken foldersPath token
 
-getFolder :: String -> Aff (ResponseMessage ReleasesResponse)
-getFolder id = do
-  username <- getUsername
-  path <- withToken getToken $ apiPath <> "/users/" <> username <> "/collection/folders/" <> id <> "/releases"
-  get (URL path)
+getFolder :: AppState -> String -> Aff (ResponseMessage ReleasesResponse)
+getFolder { foldersPath, token } id = get (URL path)
+  where
+  path = withToken token $ foldersPath <> id <> "/releases"
 
 getRelease :: String -> Aff (ResponseMessage Release)
 getRelease id = do
