@@ -11,3 +11,28 @@ in  upstream
     , repo = "https://github.com/aquarazorda/purescript-mongo"
     , version = "master"
   }
+  with datetime-iso = {
+    dependencies =
+  [ "aff"
+  , "argonaut"
+  , "argonaut-codecs"
+  , "argonaut-core"
+  , "arrays"
+  , "bifunctors"
+  , "datetime"
+  , "effect"
+  , "either"
+  , "enums"
+  , "foldable-traversable"
+  , "maybe"
+  , "newtype"
+  , "parsing"
+  , "partial"
+  , "prelude"
+  , "spec"
+  , "strings"
+  , "transformers"
+  ]
+  ,  repo = "https://github.com/input-output-hk/purescript-datetime-iso"
+  , version = "master"
+  }

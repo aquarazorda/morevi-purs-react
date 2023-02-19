@@ -4,11 +4,11 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Database.Mongo as M
-import Effect.Aff (Aff)
+import Effect.Aff (Aff, Error)
 import Foreign (Foreign)
 import Morevi.Backend.Internal.Env (fromEnv)
 import Morevi.Backend.Requests (ResponseMessage, cInternal, cSuccess)
-import Simple.JSON (class WriteForeign, undefined, write)
+import Simple.JSON (class WriteForeign, undefined)
 
 data MongoResponse
   = SAVING_DATA_FAILED
@@ -40,18 +40,20 @@ createDbPath = do
     Just n', Just u', Just usr', Just pass' -> pure $ Just $ "mongodb://" <> usr' <> ":" <> pass' <> "@" <> u' <> "/" <> n'
     _, _, _, _ -> pure Nothing
 
-type DBAction res
-  = Foreign -> M.InsertOptions -> M.Collection Foreign -> Aff res
+type DBAction res a
+  = WriteForeign a => M.Collection a -> Aff (Either Error res)
 
-readAndTakeAction ::
+action ::
   forall a res dbRes.
   WriteForeign a =>
   DBResponse MongoResponse res =>
-  M.Database -> String -> DBAction dbRes -> a -> Aff (ResponseMessage res)
-readAndTakeAction db collection action json = do
+  M.Database -> String -> DBAction dbRes a -> Aff (ResponseMessage res)
+action db collection dbAction = do
   col <- M.collection collection db
   case col of
     Right c -> do
-      _ <- action (write json) M.defaultInsertOptions c
-      pure $ showMessage GENERIC_SUCCESS
+      res <- dbAction c
+      case res of
+        Right _ -> pure $ showMessage GENERIC_SUCCESS
+        Left _ -> pure $ showMessage SAVING_DATA_FAILED
     Left _ -> pure $ showMessage SAVING_DATA_FAILED

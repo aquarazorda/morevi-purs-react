@@ -3,7 +3,7 @@ module Morevi.Backend.Requests where
 import Prelude
 import Data.Either (Either(..))
 import Data.Tuple (Tuple(..))
-import Effect.Aff (Aff)
+import Effect.Aff (Aff, Error)
 import HTTPure (ResponseM, Status, headers, internalServerError', ok')
 import HTTPure.Headers (Headers)
 import HTTPure.Status (internalServerError, ok)
@@ -55,12 +55,17 @@ withHeaders =
 fetch :: M.Fetch
 fetch = M.fetch nodeFetch
 
-get :: forall res. URL -> Aff (ResponseMessage res)
+checkResponse :: forall a. ReadForeign a => Either Error a -> ResponseMessage a
+checkResponse = case _ of
+  Left _ -> cError internalServerError "Error fetching data"
+  Right data' -> case readAsForeign data' of
+    Left _ -> cError internalServerError "Error parsing data"
+    Right data'' -> cSuccess data''
+
+get :: forall res. ReadForeign res => URL -> Aff (ResponseMessage res)
 get url = do
   res <- makeRequest fetch getMethod url
-  case res of
-    Left _ -> pure $ Left $ cInternal' "Error fetching data"
-    Right r -> pure $ Right { code: ok, data: r }
+  pure $ checkResponse res
 
 send :: forall a. WriteForeign a => ResponseMessage a -> ResponseM
 send d = case d of

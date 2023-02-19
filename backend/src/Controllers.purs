@@ -5,7 +5,8 @@ import Data.Either (Either(..))
 import HTTPure (ResponseM)
 import Morevi.Backend.Handlers.Folders (findFolder, saveFolder)
 import Morevi.Backend.Requests (ResponseMessage, send)
-import Morevi.Backend.Requests.Discogs (Folder, getFolder, getFolders)
+import Morevi.Backend.Requests.Discogs (getFolder, getFolders)
+import Morevi.Backend.Types.Discogs (Folder)
 import Types (AppState)
 
 foldersController :: AppState -> ResponseM
