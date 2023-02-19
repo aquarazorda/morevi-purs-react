@@ -1,37 +1,41 @@
-module Common.Types.Releases where
+module Morevi.Common.Types.Releases where
 
-import Data.Nullable (Nullable)
 import Data.Maybe (Maybe)
+import Data.Nullable (Nullable)
 
-type Label = {
-  id :: Int,
-  name :: String
-}
+type Label
+  = { id :: Int
+    , name :: String
+    }
 
-type Category =
-  { id :: Int
-  , category_name :: String
-  }
+type Artist
+  = { name :: String
+    }
 
-type Track =
-  { title :: String
-  , link :: Nullable String
-  }
+type Category
+  = { id :: Int
+    , category_name :: String
+    }
 
-type Release' =
-  ( id :: Int
-  , title :: String
-  , year :: Int
-  , cat_no :: Nullable String
-  , condition :: String
-  , stock :: Int
-  , date :: String
-  , label_id :: Int
-  )
+type Track
+  = { title :: String
+    , link :: Nullable String
+    }
 
-type Release =
-  { categories :: Array Category
-  , tracks :: Array Track
-  , label :: Maybe Label
-  | Release'
-  }
+type Release'
+  = ( id :: Int
+    , title :: String
+    , year :: Int
+    , cat_no :: Nullable String
+    , condition :: String
+    , stock :: Int
+    , date :: String
+    , label_id :: Int
+    )
+
+type Release
+  = { categories :: Array Category
+    , tracks :: Array Track
+    , label :: Maybe Label
+    | Release'
+    }
