@@ -44,4 +44,4 @@ unsafeCreateDOMComponent ::
 unsafeCreateDOMComponent = \str -> pure $ dynamic_ str
 
 type Component props
-  = (props -> JSX)
+  = props -> JSX

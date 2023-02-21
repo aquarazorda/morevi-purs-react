@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { flex } from "@styles/Main.css";
-import * as headerStyles from "@styles/Header.css";
+import { flex, iconSize } from "@styles/Main.css";
+import { headerStyles } from "@styles/Header.css";
 
-export { style, flex, headerStyles };
+export { style, iconSize, flex, headerStyles };

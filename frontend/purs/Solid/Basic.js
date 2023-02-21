@@ -4,15 +4,15 @@ import { createContext as _createContext, createMemo, For } from "solid-js";
 const runIfFn = (fn) => (typeof fn === 'function' ? createMemo(fn) : fn);
 
 export const dynamic = (component) => (props) => () => {
-  const ps = Object.keys(props || {}).reduce((acc, key) => {
-    typeof props[key] === 'object' && props[key].map
-      ? acc[key] = props[key].map(runIfFn)
-      : acc[key] = runIfFn(props[key]);
-    return acc;
-  });
+  const ps = {
+    ...props,
+    get children() {
+      return props?.children?.map?.(runIfFn);
+    }
+  }
 
-  return createComponent(Dynamic, ({ component, ...(ps(props)) }));
-}
+  return createComponent(Dynamic, ({ component, ...(ps || {}) }));
+};
 
 export const foreach = (each) => (render) => (props) => createComponent(For, {
   props,

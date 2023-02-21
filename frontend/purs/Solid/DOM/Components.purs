@@ -1,5 +1,6 @@
 module Solid.Basic.DOM.Components where
 
+import Morevi.Frontend.Styles.Main (CSS)
 import Prim.Row (class Union)
 import Solid.Basic (JSX, dynamic)
 import Solid.Basic.DOM.Generated (Props_button, Props_div, Props_img)
@@ -17,6 +18,9 @@ div = dynamic "div"
 
 div_ :: Array JSX -> JSX
 div_ children = div { children }
+
+div' :: CSS -> Array JSX -> JSX
+div' css children = div { className: css, children }
 
 button ::
   forall attrs attrs_.

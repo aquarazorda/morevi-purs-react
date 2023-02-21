@@ -1,6 +1,7 @@
 { name = "morevi-frontend"
 , dependencies =
   [ "aff"
+  , "console"
   , "effect"
   , "either"
   , "foreign-object"
@@ -10,7 +11,9 @@
   , "morevi-common"
   , "nullable"
   , "prelude"
+  , "record"
   , "refs"
+  , "strings"
   , "tuples"
   , "unsafe-coerce"
   , "web-dom"

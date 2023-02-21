@@ -1,5 +1,6 @@
 ---
-import { header as Header } from '@purs/Morevi.Frontend.Components.Header';
+// import { header as Header } from '@purs/Morevi.Frontend.Components.Header';
+import { Counter } from '../solid/';
 ---
 
 <html lang="en">
@@ -11,6 +12,7 @@ import { header as Header } from '@purs/Morevi.Frontend.Components.Header';
 		<title>Astro</title>
 	</head>
 	<body>
-		<Header />
+		<!-- <Header client:load /> -->
+		<Counter client:load />
 	</body>
 </html>
