@@ -9,6 +9,11 @@ import Milkis as M
 
 foreign import decodeResponse :: forall a. Foreign -> a
 
+type Response a
+  = { code :: Int
+    , data :: a
+    }
+
 withToken :: String -> String -> String
 withToken token path = path <> "?token=" <> token
 
