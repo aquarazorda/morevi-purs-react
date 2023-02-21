@@ -22,6 +22,11 @@ type Error'
 type ResponseMessage a
   = Either Error' (Success' a)
 
+unwrap :: forall a. ResponseMessage a -> Either Error' a
+unwrap = case _ of
+  Left err -> Left err
+  Right data' -> Right data'.data
+
 respAsForeign :: forall a b. ReadForeign a => ReadForeign b => ResponseMessage a -> ResponseMessage b
 respAsForeign (Left { message }) = cError internalServerError message
 
@@ -31,6 +36,9 @@ respAsForeign (Right res) = case readAsForeign res.data of
 
 cError :: forall a. Status -> String -> ResponseMessage a
 cError code message = Left { code, message }
+
+cError' :: forall a. Error' -> ResponseMessage a
+cError' err = Left err
 
 cInternal :: forall a. String -> ResponseMessage a
 cInternal = cError internalServerError

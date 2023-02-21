@@ -38,11 +38,14 @@ type Release
     , notes :: Array Note
     }
 
+type Releases
+  = Array Release
+
 type FolderResponse
   = { folders :: Folders
     }
 
 type ReleasesResponse
   = { pagination :: Pagination
-    , releases :: Array Release
+    , releases :: Releases
     }

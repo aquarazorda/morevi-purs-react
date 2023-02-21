@@ -43,12 +43,12 @@ createDbPath = do
 type DBAction res a
   = WriteForeign a => M.Collection a -> Aff (Either Error res)
 
-action ::
+runAction ::
   forall a res dbRes.
   WriteForeign a =>
   DBResponse MongoResponse res =>
   M.Database -> String -> DBAction dbRes a -> Aff (ResponseMessage res)
-action db collection dbAction = do
+runAction db collection dbAction = do
   col <- M.collection collection db
   case col of
     Right c -> do

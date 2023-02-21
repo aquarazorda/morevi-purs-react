@@ -7,7 +7,7 @@ export const _wrapper = el_(styled.div((p) => ({
   padding: "10px",
   backgroundColor: "#EDEDED",
   border: "1px solid #BCBCBC99",
-  gap: "52px",
+  gap: "42px",
   fontSize: "18px"
 })));
 

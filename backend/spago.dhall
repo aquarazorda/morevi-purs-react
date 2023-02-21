@@ -17,6 +17,7 @@
   , "prelude"
   , "simple-json"
   , "tuples"
+  , "unsafe-coerce"
   ]
 , packages = ../packages.dhall
 , sources = [ "src/**/*.purs" ]

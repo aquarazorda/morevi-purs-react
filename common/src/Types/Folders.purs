@@ -5,5 +5,4 @@ type Folder
     , count :: Int
     , name :: String
     , dateAdded :: String
-    , dateModified :: String
     }

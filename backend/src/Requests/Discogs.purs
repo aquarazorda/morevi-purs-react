@@ -41,10 +41,10 @@ getFolders { token, foldersPath } = do
   where
   path = withToken token foldersPath
 
-getFolder :: AppState -> String -> Aff (ResponseMessage ReleasesResponse)
-getFolder { foldersPath, token } id = get (URL path)
+getFolder :: AppState -> String -> Int -> Aff (ResponseMessage ReleasesResponse)
+getFolder { foldersPath, token } id page = get (URL path)
   where
-  path = withToken token $ foldersPath <> "/" <> id <> "/releases"
+  path = (withToken token $ foldersPath <> "/" <> id <> "/releases") <> "&per_page=100&page=" <> show page
 
 getRelease :: String -> Aff (ResponseMessage Release)
 getRelease id = do

@@ -30,7 +30,7 @@ getLabel l =
       Nothing -> "(Not on label)"
 
 releaseImage :: String -> JSX
-releaseImage url = S.img { src: url, width: 180, height: 180 }
+releaseImage url = S.img { src: url, width: 148, height: 148 }
 
 releaseContent :: Release -> JSX
 releaseContent { basic_information } = contentWrapper [
