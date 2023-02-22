@@ -1,9 +1,12 @@
 { name = "morevi-frontend"
 , dependencies =
   [ "aff"
+  , "aff-promise"
+  , "arrays"
   , "console"
   , "effect"
   , "either"
+  , "foreign"
   , "foreign-object"
   , "functions"
   , "maybe"

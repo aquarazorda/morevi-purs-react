@@ -1,9 +1,5 @@
-.spago
+node_modules
+dist
 output
-/node_modules
-.psc-ide-port
-yarn.lock
-/serve
-/dist
-/todo
-index.js
+todo
+.spago

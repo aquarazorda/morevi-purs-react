@@ -1,17 +1,18 @@
 import { createComponent, Dynamic } from "solid-js/web";
-import { createContext as _createContext, createMemo, For } from "solid-js";
+import { createContext as _createContext, createMemo, For, mergeProps } from "solid-js";
 
-const runIfFn = (fn) => (typeof fn === 'function' ? createMemo(fn) : fn);
+const isSignal = val => val.constructor?.name === "Signal" && val.value0;
 
-export const dynamic = (component) => (props) => () => {
-  const ps = {
-    ...props,
-    get children() {
-      return props?.children?.map?.(runIfFn);
-    }
+const checkIfSignal = (val) => {
+  if (Array.isArray(val) && val.length > 0) {
+    return val.map(checkIfSignal);
   }
 
-  return createComponent(Dynamic, ({ component, ...(ps || {}) }));
+  return isSignal(val) ? createMemo(val.value0) : val;
+}
+
+export const dynamic = (component) => (props) => {
+  return createComponent(Dynamic, mergeProps({component}, props));
 };
 
 export const foreach = (each) => (render) => (props) => createComponent(For, {
